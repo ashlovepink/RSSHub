@@ -1,5 +1,26 @@
 {
+    "version": 2,
     "framework": null,
     "github": { "silent": true },
-    "routes": [{ "src": "/.*", "dest": "/api/vercel.ts" }]
+    "builds": [
+        {
+            "src": "lib/index.ts",
+            "use": "@vercel/node",
+            "config": {
+                "includeFiles": ["dist/**", "lib/**"]
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "dist/index.js"
+        }
+    ],
+    "env": {
+        "NODE_ENV": "production",
+        "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true",
+        "CACHE_EXPIRE": "3600",
+        "ACCESS_KEY": "mysecret123"
+    }
 }
